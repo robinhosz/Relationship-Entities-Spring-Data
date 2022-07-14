@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Campeonato {
+@Table(name = "tb_campeonato")
+public class Campeonato implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +24,14 @@ public class Campeonato {
 
     private String nome;
 
-    @ManyToMany(mappedBy = "campeonato")
+    @ManyToMany
+    @JoinTable(name = "tb_time_campeonato",
+            joinColumns = @JoinColumn(name = "campeonato_id"),
+            inverseJoinColumns = @JoinColumn(name = "time_id"))
     private List<Time> time = new ArrayList<>();
 
+    public Campeonato(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 }
