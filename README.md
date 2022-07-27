@@ -6,7 +6,7 @@
 
 <br><br>
 
-## ✅ Features
+## ✅ Topics
 
 - [x] Relationships
 - [x] OneToOne, ManyToOne, OneToMany, ManyToMany
